@@ -1,4 +1,4 @@
-name: Update inputs
+name: Update Inputs
 
 on:
   schedule:

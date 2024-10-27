@@ -1,6 +1,11 @@
-name: Cachix
+name: Build and Push to Cachix
 on:
   push:
+    branches:
+      - main
+  workflow_run:
+    workflows: ['Update Inputs']
+    types: [completed]
     branches:
       - main
 
