@@ -1,4 +1,4 @@
-# A [Caddy](https://caddyserver.com/) build that includes the [Digitalocean DNS module](https://github.com/caddy-dns/digitalocean)
+# A [Caddy](https://caddyserver.com/) build that includes the [Hetzner DNS module](https://github.com/caddy-dns/hetzner)
 ## Stolen from [pinpox](https://github.com/pinpox/nixos-caddy-patched) and [Ramblurr](https://github.com/Ramblurr/nixos-caddy)
 
 ### Explore further:

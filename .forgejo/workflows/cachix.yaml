@@ -1,0 +1,63 @@
+name: Build and Push to Cachix
+on:
+  push:
+    branches:
+      - main
+  workflow_run:
+    workflows: ['Update Inputs']
+    types: [completed]
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  publish-x86_64:
+    name: Push to Binary Cache (X86-64)
+    runs-on: x86_64-docker
+    container:
+      image: ghcr.io/catthehacker/ubuntu:act-22.04
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v4
+
+    - name: Install Nix
+      uses: https://github.com/cachix/install-nix-action@V27
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+        github_access_token: ${{ secrets.GH_PUBLIC_REPO_ACCESS_TOKEN }}
+
+    - name: Authenticate with Cachix
+      uses: https://github.com/cachix/cachix-action@v15
+      with:
+        name: adtya
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+    - name: Build and push flake output
+      run: |
+        nix build -L .#caddy --access-tokens "github.com=${{ secrets.GH_PUBLIC_REPO_ACCESS_TOKEN }}"
+
+  publish-aarch64:
+    name: Push to Binary Cache (aarch64)
+    runs-on: aarch64-docker
+    container:
+      image: ghcr.io/catthehacker/ubuntu:act-22.04
+    steps:
+    - name: Checkout sources
+      uses: actions/checkout@v4
+
+    - name: Install Nix
+      uses: https://github.com/cachix/install-nix-action@V27
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+        github_access_token: ${{ secrets.GH_PUBLIC_REPO_ACCESS_TOKEN }}
+
+    - name: Authenticate with Cachix
+      uses: https://github.com/cachix/cachix-action@v15
+      with:
+        name: adtya
+        authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+    - name: Build and push flake output
+      run: |
+        nix build -L .#caddy --access-tokens "github.com=${{ secrets.GH_PUBLIC_REPO_ACCESS_TOKEN }}"
+
