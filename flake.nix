@@ -40,6 +40,7 @@
           ldflags = [
             "-s"
             "-w"
+            "-X github.com/caddyserver/caddy/v2.CustomVersion=${version}"
           ];
 
           nativeBuildInputs = [pkgs.installShellFiles];
