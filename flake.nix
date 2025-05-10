@@ -1,5 +1,5 @@
 {
-  description = "Flake providing Caddy executable with additional modules";
+  description = "Flake providing Caddy executable with Hetzner DNS module";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -19,8 +19,8 @@
       caddy-src = pkgs.fetchFromGitHub {
         owner = "caddyserver";
         repo = "dist";
-        rev = "v2.8.4";
-        hash = "sha256-O4s7PhSUTXoNEIi+zYASx8AgClMC5rs7se863G6w+l0=";
+        rev = "v2.9.1";
+        hash = "sha256-28ahonJ0qeynoqf02gws0LstaL4E08dywSJ8s3tgEDI=";
       };
     in {
       formatter = pkgs.alejandra;
@@ -35,7 +35,7 @@
           inherit version;
           src = ./src;
           runVend = true;
-          vendorHash = "sha256-GKMB7/jSKY9CHRGEd45xAdu4nX1aFOBoGZh7mfPOUOk=";
+          vendorHash = "sha256-rH4J33idvgkAmXF3NbHolifUwcq7EEIP7zJUy+Qvorw=";
 
           ldflags = [
             "-s"
